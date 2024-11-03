@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Calculators</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .custom-padding {
+            padding: 20px;
+        }
+        body {
+            background-color: #f5f5f5;  /* Light grey background */
+        }
+        /* Optional: Add a white background to the calculator sections for better contrast */
+        .col-sm-4 {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid custom-padding">
+
+
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <h2 class="text-center">Resistor Voltage Divider Calculator</h2>
+                <div class="form-group">
+                    <label for="vin">Input Voltage (V):</label>
+                    <input type="number" id="vin" class="form-control" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="vout-desired">Desired Output Voltage (Vout):</label>
+                    <input type="number" id="vout-desired" class="form-control" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="rsource">Resistor Connected to Source (Rsource):</label>
+                    <div class="input-group">
+                        <input type="number" id="rsource" class="form-control" step="0.01">
+                        <select id="rsource-multiplier" class="form-control">
+                            <option value="1">Ohms</option>
+                            <option value="1000">Kilo Ohms</option>
+                            <option value="1000000">Mega Ohms</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="calculateRground()" class="btn btn-primary">Calculate Rground</button>
+
+                <div class="mt-3">
+                    <h4>Ideal Resistor Connected to Ground (Rground):</h4>
+                    <p><span id="rground">0</span> Ohms</p>
+
+                    <h5>Lesser E96 Value: <span id="lesser-value">-</span></h5>
+                    <p>Lesser E96 Output: <span id="lesser-value-output">-</span></p>
+                    <p>Actual Input To Hit Output Lesser: <span id="lesser-input">-</span></p>
+
+                    <h5>Greater E96 Value: <span id="greater-value">-</span></h5>
+                    <p>Greater E96 Output: <span id="greater-value-output">-</span></p>
+                    <p>Actual Input To Hit Output Greater: <span id="greater-input">-</span></p>
+
+                    <div class="text-center">
+                        <img src="./assets/divider.png" class="img-fluid my-3" style="width: 15%;" alt="Divider">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <h2 class="text-center">Nearest Resistor Calculator</h2>
+                <div class="form-group">
+                    <label for="resistor-value">Find Nearest Resistor Value:</label>
+                    <div class="input-group">
+                        <input type="number" id="resistor-value" class="form-control" step="0.01">
+                        <select id="resistor-multiplier" class="form-control">
+                            <option value="1">Ohms</option>
+                            <option value="1000">Kilo Ohms</option>
+                            <option value="1000000">Mega Ohms</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="calculateNearestE96()" class="btn btn-primary">Find Closest E96 Values</button>
+
+                <div class="mt-3">
+                    <h5>Lesser E96 Value: <span id="lesser-e96value">-</span></h5>
+                    <h5>Greater E96 Value: <span id="greater-e96value">-</span></h5>
+                </div>
+
+                <h2 class="mt-5 text-center">IPC Through-Hole Calculator</h2>
+                <div class="form-group">
+                    <label for="lead-diameter">Lead Diameter (mm):</label>
+                    <input type="number" id="lead-diameter" class="form-control" step="0.01">
+                </div>
+                <button onclick="calculateIPCThroughHole()" class="btn btn-primary">Calculate Hole and Pad Sizes</button>
+
+                <div class="mt-3">
+                    <h5>Level A (IPC-2222):</h5>
+                    <p>Minimum Hole Size: <span id="level-a-hole-size">-</span> mm</p>
+                    <p>Pad Diameter: <span id="level-a-pad-diameter">-</span> mm</p>
+
+                    <h5>Level B (IPC-2222):</h5>
+                    <p>Minimum Hole Size: <span id="level-b-hole-size">-</span> mm</p>
+                    <p>Pad Diameter: <span id="level-b-pad-diameter">-</span> mm</p>
+
+                    <h5>Level C (IPC-2222):</h5>
+                    <p>Minimum Hole Size: <span id="level-c-hole-size">-</span> mm</p>
+                    <p>Pad Diameter: <span id="level-c-pad-diameter">-</span> mm</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="functions.js"></script>
+</body>
+</html>
